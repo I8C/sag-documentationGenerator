@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~  Copyright (c) 2017, i8c N.V. (Integr8 Consulting; http://www.i8c.be)
+  ~  All Rights Reserved.
+  ~  
+  ~  Licensed under the Apache License, Version 2.0 (the "License");
+  ~  you may not use this file except in compliance with the License.
+  ~  You may obtain a copy of the License at
+  ~  
+  ~  http://www.apache.org/licenses/LICENSE-2.0
+  ~  
+  ~  Unless required by applicable law or agreed to in writing, software
+  ~  distributed under the License is distributed on an "AS IS" BASIS,
+  ~  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~  See the License for the specific language governing permissions and
+  ~  limitations under the License.
+  -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.i8c.be/sag/documentationgenerator/intermediate/v1" targetNamespace="http://www.i8c.be/sag/documentationgenerator/intermediate/v1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="Packages">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Package" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="tns:PackageType">
+								<xs:sequence>
+									<xs:element name="Dependencies" minOccurs="0">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="Package" type="tns:PackageType" maxOccurs="unbounded"/>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+									<xs:element name="Folders" minOccurs="0">
+										<xs:complexType>
+											<xs:sequence>
+												<xs:element name="Folder" maxOccurs="unbounded">
+													<xs:complexType>
+														<xs:sequence>
+															<xs:element name="DocumentTypes" minOccurs="0">
+																<xs:complexType>
+																	<xs:sequence>
+																		<xs:element name="DocumentType" maxOccurs="unbounded">
+																			<xs:complexType>
+																				<xs:complexContent>
+																					<xs:extension base="tns:ComponentType">
+																						<xs:sequence>
+																							<xs:element name="Fields" minOccurs="0">
+																								<xs:complexType>
+																									<xs:sequence>
+																										<xs:element name="Field" type="tns:FieldType" minOccurs="0" maxOccurs="unbounded"/>
+																									</xs:sequence>
+																								</xs:complexType>
+																							</xs:element>
+																						</xs:sequence>
+																					</xs:extension>
+																				</xs:complexContent>
+																			</xs:complexType>
+																		</xs:element>
+																	</xs:sequence>
+																</xs:complexType>
+															</xs:element>
+															<xs:element name="Specifications" minOccurs="0">
+																<xs:complexType>
+																	<xs:sequence>
+																		<xs:element name="Specification" type="tns:ComponentWithInputOutputType" maxOccurs="unbounded"/>
+																	</xs:sequence>
+																</xs:complexType>
+															</xs:element>
+															<xs:element name="Services" minOccurs="0">
+																<xs:complexType>
+																	<xs:sequence>
+																		<xs:element name="Service" maxOccurs="unbounded">
+																			<xs:complexType>
+																				<xs:complexContent>
+																					<xs:extension base="tns:ComponentWithInputOutputType">
+																						<xs:attribute name="type" type="xs:string" use="required"/>
+																					</xs:extension>
+																				</xs:complexContent>
+																			</xs:complexType>
+																		</xs:element>
+																	</xs:sequence>
+																</xs:complexType>
+															</xs:element>
+														</xs:sequence>
+														<xs:attribute name="qualifiedName" type="xs:string" use="required"/>
+													</xs:complexType>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="PackageType">
+		<xs:attribute name="name" type="xs:string" use="required"/>
+		<xs:attribute name="version" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="ComponentType">
+		<xs:sequence>
+			<xs:element name="Description" type="xs:string" minOccurs="0"/>
+			<xs:element name="UsageNotes" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="ComponentWithInputOutputType">
+		<xs:complexContent>
+			<xs:extension base="tns:ComponentType">
+				<xs:sequence>
+					<xs:element name="Input" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="Field" type="tns:FieldType" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="Output" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="Field" type="tns:FieldType" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="FieldType">
+		<xs:sequence>
+			<xs:element name="Comment" type="xs:string" minOccurs="0"/>
+			<xs:element name="Options" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Option" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Enumeration" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Value" type="xs:string" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Fields" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Field" type="tns:FieldType" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+		<xs:attribute name="optional" type="xs:boolean" use="optional"/>
+		<xs:attribute name="nillable" type="xs:boolean" use="optional"/>
+		<xs:attribute name="type" type="xs:string" use="optional"/>
+		<xs:attribute name="list" type="xs:boolean" use="optional"/>
+	</xs:complexType>
+</xs:schema>

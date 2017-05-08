@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Packages xmlns="http://www.i8c.be/sag/documentationgenerator/intermediate/v1">
+	<Package name="PackageNameNotFound" version="1.0" xmlns="http://www.i8c.be/sag/documentationgenerator/intermediate/v1">
+		<Folders>
+			<Folder qualifiedName="acme.adapters">
+				<Services>
+					<Service name="insertOrderDetails" type="AdapterService" xmlns="http://www.i8c.be/sag/documentationgenerator/intermediate/v1">
+						<Input>
+							<Field name="insertOrderDetailsInput" nillable="true" type="record">
+								<Fields>
+									<Field name="overrideCredentials" nillable="true" type="record">
+										<Fields>
+											<Field name="$dbUser" nillable="true" type="string"/>
+											<Field name="$dbPassword" nillable="true" type="string"/>
+										</Fields>
+									</Field>
+									<Field name="ORDER_ID" nillable="true" type="string"/>
+									<Field name="TRANSACTION_ID" nillable="true" type="string"/>
+									<Field name="SKU" nillable="true" type="string"/>
+									<Field name="QUANTITY" nillable="true" type="string"/>
+								</Fields>
+							</Field>
+							<Field name="$connectionName" nillable="false" optional="true" type="string"/>
+						</Input>
+						<Output>
+							<Field name="insertOrderDetailsOutput" nillable="true" type="record">
+								<Fields>
+									<Field name="insertCount" nillable="true" type="string"/>
+								</Fields>
+							</Field>
+						</Output>
+					</Service>
+				</Services>
+			</Folder>
+		</Folders>
+	</Package>
+</Packages>

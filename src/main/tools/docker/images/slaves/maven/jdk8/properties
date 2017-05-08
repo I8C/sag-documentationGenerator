@@ -1,0 +1,2 @@
+name: i8c/jenkins-maven-slave
+version: latest;jdk8;jdk8-3.5.0

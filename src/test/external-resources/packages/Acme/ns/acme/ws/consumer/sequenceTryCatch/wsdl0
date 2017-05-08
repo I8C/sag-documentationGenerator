@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="sequenceTryCatch" targetNamespace="http://10.0.2.116/acme.ws.provider:sequenceTryCatch" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soapjms="http://www.w3.org/2010/soapjms/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://10.0.2.116/acme.ws.provider:sequenceTryCatch" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://10.0.2.116/acme.ws.provider:sequenceTryCatch" xmlns:tns="http://10.0.2.116/acme.ws.provider:sequenceTryCatch" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+          <xsd:element name="sequenceTryCatch" type="tns:sequenceTryCatch"/>
+          <xsd:element name="sequenceTryCatchResponse" type="tns:sequenceTryCatchResponse"/>
+          <xsd:complexType name="sequenceTryCatch">
+            <xsd:sequence>
+              <xsd:element name="filename" nillable="true" type="xsd:string"/>
+            </xsd:sequence>
+          </xsd:complexType>
+          <xsd:complexType name="sequenceTryCatchResponse">
+            <xsd:sequence>
+              <xsd:element name="result" nillable="true" type="xsd:string"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        	</xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="sequenceTryCatch_PortType_sequenceTryCatchResponse">
+    <wsdl:part name="parameters" element="tns:sequenceTryCatchResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="sequenceTryCatch_PortType_sequenceTryCatch">
+    <wsdl:part name="parameters" element="tns:sequenceTryCatch">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="sequenceTryCatch_PortType">
+    <wsdl:operation name="sequenceTryCatch">
+      <wsdl:input message="tns:sequenceTryCatch_PortType_sequenceTryCatch">
+    </wsdl:input>
+      <wsdl:output message="tns:sequenceTryCatch_PortType_sequenceTryCatchResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="acme_ws_provider_sequenceTryCatch_Binder" type="tns:sequenceTryCatch_PortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="sequenceTryCatch">
+      <soap:operation soapAction="acme_ws_provider_sequenceTryCatch_Binder_sequenceTryCatch" style="document"/>
+      <wsdl:input>
+        <soap:body parts="parameters" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body parts="parameters" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="acme.ws.provider.sequenceTryCatch">
+    <wsdl:port name="acme_ws_provider_sequenceTryCatch_Port" binding="tns:acme_ws_provider_sequenceTryCatch_Binder">
+      <soap:address location="http://10.0.2.116:5555/ws/acme.ws.provider.sequenceTryCatch/acme_ws_provider_sequenceTryCatch_Port"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
